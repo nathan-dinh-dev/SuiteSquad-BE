@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="JUnit" />
+    <plugin id="Lombook Plugin" />
+    <plugin id="com.intellij.gradle" />
+    <plugin id="com.intellij.spring.boot" />
+    <plugin id="com.intellij.spring.mvc" />
+  </component>
+</project>
