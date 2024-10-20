@@ -2,9 +2,12 @@ package org.suitesquad.likehome.rest;
 
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.suitesquad.likehome.rest.ResponseTypes.Reservation;
 import org.suitesquad.likehome.rest.ResponseTypes.SignUpInfo;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * This class handles all authenticated requests.
@@ -30,6 +33,32 @@ public class AuthenticatedController {
      */
     @PostMapping(path = "/signin")
     public void signedIn(JwtAuthenticationToken token) {
+
+    }
+
+    /**
+     * Get the reservations for this user.
+     */
+    @GetMapping(path = "/reservations")
+    public List<Reservation> getReservations(JwtAuthenticationToken token) {
+        return List.of(Reservation.sample);
+    }
+
+    /**
+     * Get a specific reservation for this user by ID.
+     */
+    @GetMapping(path = "/reservations/{reservationId}")
+    public Reservation getReservationById(JwtAuthenticationToken token, @PathVariable String reservationId) {
+        return Stream.of(Reservation.sample).filter(r -> r.id().equals(reservationId)).findAny().orElseThrow();
+    }
+
+    /**
+     * Create a reservation for this user.
+     * The reservation.id field and reservation.userID fields are ignored.
+     * Instead, the id is generated and assigned, and the user ID is retrieved from the token.
+     */
+    @PostMapping(path = "/reservations")
+    public void createReservation(JwtAuthenticationToken token, @RequestBody Reservation reservation) {
 
     }
 
