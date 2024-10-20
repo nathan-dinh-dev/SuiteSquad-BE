@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * <p>
  * There is a sample of each record in the class definition, for testing purposes.
  */
-public class ResponseTypes {
+public class RestTypes {
     public record SignUpInfo(String email, String name) {}
 
     public record Room(String id, String name, String description, double rating,

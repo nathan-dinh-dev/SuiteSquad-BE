@@ -1,7 +1,7 @@
 package org.suitesquad.likehome.rest;
 
 import org.springframework.web.bind.annotation.*;
-import org.suitesquad.likehome.rest.ResponseTypes.Room;
+import org.suitesquad.likehome.rest.RestTypes.Room;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class PublicController {
     }
 
     @GetMapping("/rooms/{roomId}")
-    public Room getRoomById(@PathVariable(required = false) String roomId) {
+    public Room getRoomById(@PathVariable String roomId) {
         return Stream.of(Room.sample).filter(r -> r.id().equals(roomId)).findAny().orElseThrow();
     }
 

@@ -2,8 +2,8 @@ package org.suitesquad.likehome.rest;
 
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import org.suitesquad.likehome.rest.ResponseTypes.Reservation;
-import org.suitesquad.likehome.rest.ResponseTypes.SignUpInfo;
+import org.suitesquad.likehome.rest.RestTypes.Reservation;
+import org.suitesquad.likehome.rest.RestTypes.SignUpInfo;
 
 import java.util.List;
 import java.util.Map;
