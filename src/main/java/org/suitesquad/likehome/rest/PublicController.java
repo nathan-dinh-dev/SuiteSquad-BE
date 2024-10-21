@@ -25,7 +25,6 @@ public class PublicController {
         return "pong";
     }
 
-
     private final UserService userService;
     private final HotelService hotelService;
     private final ReservationService reservationService;
@@ -38,34 +37,19 @@ public class PublicController {
     }
 
     @GetMapping("/userdb")
-    public String userDb() {
-        List<User> userList = userService.fetchAllUserData();
-        if (userList != null && !userList.isEmpty()) {
-            return userList.getFirst().getEmail();  // returns the email of the first user in our database
-        }
-        return "Failure, no users found";
+    public List<User> userDb() {
+        return userService.fetchAllUserData();
     }
 
     @GetMapping("/hoteldb")
-    public String hotelDb() {
-        List<Hotel> hotelList = hotelService.fetchAllHotelData();
-        if (hotelList != null && !hotelList.isEmpty()) {
-            return hotelList.getFirst().getName();  // returns the name of the first hotel in our database
-        }
-        return "Failure, no hotels found";
+    public List<Hotel> hotelDb() {
+        return hotelService.fetchAllHotelData();
     }
 
     @GetMapping("/reservedb")
-    public String reservationDb() {
-        List<Reservation> reservationList = reservationService.fetchAllReservationData();
-        if (reservationList != null && !reservationList.isEmpty()) {
-            //System.out.println("Found reservations: " + reservationList.size());
-            //System.out.println(reservationList);
-            return reservationList.getFirst().getUserId(); // returns the userId of the first reservation in our database
-        }
-        return "Failure, no reservations found";
+    public List<Reservation> reservationDb() {
+        return reservationService.fetchAllReservationData();
     }
-
 
     /**
      * Retrieve a list of all rooms with optional filters.

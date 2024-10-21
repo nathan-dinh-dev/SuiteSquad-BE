@@ -1,6 +1,7 @@
 package org.suitesquad.likehome.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,16 +10,16 @@ import java.util.Date;
 import java.util.List;
 
 @Document("reservations")
+@Getter
+@Setter
 public class Reservation {
     @Id
     @Indexed(unique = true)
     private String id;
 
-    @Getter
     //@Indexed
     private String userId;
 
-    @Getter
     //@Indexed
     private String hotelId;
 
@@ -31,18 +32,24 @@ public class Reservation {
     private Payment payment;
     private CancellationPolicy cancellationPolicy;
 
+    @Getter
+    @Setter
     public static class RoomBooked {
         private String roomType;
         private double price;
         private int quantity;
     }
 
+    @Getter
+    @Setter
     public static class Payment {
         private String paymentMethod;
         private String paymentStatus;
         private Date paymentDate;
     }
 
+    @Getter
+    @Setter
     public static class CancellationPolicy {
         private boolean allowed;
         private double penaltyFee;
