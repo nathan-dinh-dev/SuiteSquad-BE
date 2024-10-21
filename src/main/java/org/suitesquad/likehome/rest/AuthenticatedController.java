@@ -1,12 +1,16 @@
 package org.suitesquad.likehome.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.suitesquad.likehome.model.User;
 import org.suitesquad.likehome.rest.RestTypes.Reservation;
 import org.suitesquad.likehome.rest.RestTypes.SignUpInfo;
+import org.suitesquad.likehome.service.UserService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 /**
@@ -17,14 +21,25 @@ import java.util.stream.Stream;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticatedController {
+    
+    @Autowired private UserService userService;
 
     /**
      * Creates a user in the database with the email and name from the SignUpInfo object
      * and the user ID retrieved from the token.
      */
     @PostMapping(path = "/signup")
-    public void signUp(@RequestBody SignUpInfo info, JwtAuthenticationToken token) {
-
+    public User signUp(@RequestBody SignUpInfo info, JwtAuthenticationToken token) {
+        if (userService.findById(getUserID(token)).isPresent()) {
+            throw new RuntimeException("User already exists in database!");
+        }
+        var user = new User();
+        user.setId(getUserID(token));
+        user.setEmail(info.email());
+        user.setFirstName(info.firstName());
+        user.setLastName(info.lastName());
+        userService.addUserData(user);
+        return user;
     }
 
     /**
@@ -32,8 +47,8 @@ public class AuthenticatedController {
      * Checks database for user data consistency.
      */
     @PostMapping(path = "/signin")
-    public void signedIn(JwtAuthenticationToken token) {
-
+    public User signedIn(JwtAuthenticationToken token) {
+        return userService.findById(getUserID(token)).orElseThrow(()-> new NoSuchElementException("User not found in database"));
     }
 
     /**

@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * There is a sample of each record in the class definition, for testing purposes.
  */
 public class RestTypes {
-    public record SignUpInfo(String email, String name) {}
+    public record SignUpInfo(String email, String firstName, String lastName) {}
 
     public record Room(String id, String name, String description, double rating,
                        int numberOfReviews, String city, int pricePerNight, String imageUrl) {

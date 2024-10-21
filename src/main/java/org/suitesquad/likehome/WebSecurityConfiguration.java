@@ -22,7 +22,7 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(a ->
                         a.requestMatchers("/auth/**").authenticated()
-                         .requestMatchers("/admin/**").hasRole("ADMIN")
+//                         .requestMatchers("/admin/**").hasRole("ADMIN")
                          .anyRequest().anonymous())
                 .oauth2ResourceServer(o ->
                         o.jwt(Customizer.withDefaults()))
@@ -40,7 +40,6 @@ public class WebSecurityConfiguration {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("*")
-                        .allowPrivateNetwork(true)
                         .allowedOrigins("*");
             }
         };
