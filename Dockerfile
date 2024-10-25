@@ -30,5 +30,7 @@ COPY --from=build /app/build/libs/LikeHome.jar LikeHome.jar
 # Expose the application port
 EXPOSE 8080
 
+ENV DB_URL=${DB_URL}
+
 # Run the application with memory-efficient JVM options
-ENTRYPOINT ["java", "-jar", "BlitzCode.jar"]
+ENTRYPOINT ["java", "-jar", "LikeHome.jar"]
