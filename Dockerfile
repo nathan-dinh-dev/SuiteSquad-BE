@@ -32,5 +32,5 @@ EXPOSE 8080
 
 ENV DB_URL=${DB_URL}
 
-# Run the application with memory-efficient JVM options
+# Run the application
 ENTRYPOINT ["java", "-jar", "LikeHome.jar"]
